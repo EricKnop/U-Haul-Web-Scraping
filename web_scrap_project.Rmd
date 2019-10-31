@@ -1,0 +1,261 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(RSelenium)
+library(tidyverse)
+library(rvest)
+library(measurements)
+library(geosphere)
+library(leaflet)
+```
+```{r}
+#reads in the US Cities table
+wiki <- read_html("https://en.wikipedia.org/wiki/List_of_United_States_cities_by_population")
+```
+```{r}
+tbl1 <- wiki %>%
+  html_node(xpath ='//*[@id="mw-content-text"]/div/table[5]') %>%
+  html_table()
+#outputs US City's and there general statistics 
+tbl1
+```
+```{r}
+
+#renmaes repeated column headings
+colnames(tbl1)[7] = "2016 land area(miles)"
+colnames(tbl1)[8] = "2016 land area(km)"
+colnames(tbl1)[9] = "2016 pop density(miles)"
+colnames(tbl1)[10] = "2016 pop density(km)"
+#seperates Long/Lat column into 3 columns 
+tbl2 <- data.frame(str_split_fixed(tbl1$Location, " ", 3))
+colnames(tbl2)[1] = "Latitude"
+colnames(tbl2)[2] = "Longitude"
+colnames(tbl2)[3] = "junk"
+drop <- c("junk")
+#drops column junk
+tbl3 <- tbl2[ , !(names(tbl2) %in% drop)]
+```
+```{r}
+#merges original table with new Lat/Long table
+tbl4 <- merge(tbl1, tbl3, by="row.names")
+#repleaces incorrect formatting with black space
+tbl4["City_clean"] <- str_replace(tbl4$City, "\\[.*\\]", "")
+#orders tbl4 by rank
+tbl5 <- tbl4[order(tbl4$`2018rank`),]
+
+```
+
+```{r}
+#grabs columns i need for scraping
+tbl6 <- tbl5 %>%
+  select(City_clean, `State[c]`, Latitude, Longitude)
+#View(tbl6)
+
+```
+
+
+```{r}
+#uses firefox as browser for web scraping
+driver <- rsDriver(browser = c("firefox"))
+remote_driver <- driver[["client"]]
+remote_driver$open()
+
+```
+
+
+```{r}
+#creates dataframe for output from scraping
+df = data.frame(price = c(), beg_city = c(), beg_state = c(), 
+                beg_lat = c(), beg_long = c(),end_city = c(),
+                end_state = c(), end_lat = c(), end_long =c(),stringsAsFactors=FALSE)
+n = 1
+#creates list loc to grab only top 10 cities
+loc = seq(1, 10, by=1)
+#double for loop to fill in each city with each other city into blanks 
+for(i in loc){
+  for(j in loc){
+    #if the beg city is the same as the end city skip this iteration
+     if(i == j){
+      next
+     }
+    #resets remote_driver
+    remote_driver$navigate("https://www.uhaul.com")
+    #pauses for a random ammount of seconds between 1 and 5
+    Sys.sleep(sample(1:5,1,replace=T))
+    #assigns the first blank to adress_elemement_pick
+    address_element_pick <- remote_driver$findElement(using = "xpath", value = '//*[@id="PickupLocation-TruckOnly"]')
+    #assigns the second blank to adress_elemement_drop
+  address_element_drop <- remote_driver$findElement(using = "xpath", value = '//*[@id="DropoffLocation-TruckOnly"]')
+    #assigns the third blank to adress_elemement_date
+    address_element_date <- remote_driver$findElement(using = "xpath", value = '//*[@id="PickupDate-TruckOnly"]')
+    #assigns the button to button_element
+    button_element <- remote_driver$findElement(using = "xpath", value = '//*[@id="EquipmentSearch"]/div[3]/div[3]/button')
+    #clears the box from previous city
+    address_element_pick$clearElement()
+    #fills in the box with the ith city then comma then the ith state
+    address_element_pick$sendKeysToElement(list(paste(tbl6[i,"City_clean"],",",tbl6[i,"State[c]"])))
+    #clears the box from previous city
+    address_element_drop$clearElement()
+    #fills in the box with the jth city then comma then the jth state
+    address_element_drop$sendKeysToElement(list(paste(tbl6[j,"City_clean"],",",tbl6[j,"State[c]"])))
+    #clears the box from previous city
+    address_element_date$clearElement()
+    #fills in the date with a date of my choosing
+    address_element_date$sendKeysToElement(list("10/25/2019"))
+    #clicks the next page buttom
+    button_element$clickElement()
+    #stops the program for 10-15 seconds so it can load in time
+    Sys.sleep(sample(10:15,1,replace=T))
+    #asigns the price text box to output
+    output <- remote_driver$findElement(using = "xpath", value = '/html/body/main/div/div/div[3]/ul/li[1]/div/div[2]/form/div/dl/dd[1]/div/b')
+    #grabs the text for the html code
+    price_temp <- output$getElementText()
+    #fills in the output table
+    df[n,"price"] = price_temp
+    df[n,"beg_city"] = tbl6[i,"City_clean"]
+    df[n,"beg_state"] = tbl6[i,"State[c]"]
+    df[n,"beg_lat"] = tbl6[i,"Latitude"]
+    df[n,"beg_long"] =  tbl6[i,"Longitude"]
+    df[n,"end_city"] = tbl6[j,"City_clean"]
+    df[n,"end_state"] = tbl6[j,"State[c]"]
+    df[n,"end_lat"] = tbl6[j,"Latitude"]
+    df[n,"end_long"] = tbl6[j,"Longitude"]
+    n = n + 1
+    
+}
+}
+
+```
+
+
+
+
+```{r}
+#various formating issues arrise from the lat and long format
+#the below code cleans up the format so it can be put into distHaversine function
+df1$beg_lat <- as.character(df1$beg_lat)
+df1$beg_lat <- gsub("°|'|\"", " ", df1$beg_lat)
+df1$beg_lat<- iconv(df1$beg_lat, "", "ASCII", "byte")
+df1$beg_long<- iconv(df1$beg_long, "", "ASCII", "byte")
+df1$beg_lat<- gsub("<b2>", ".", df1$beg_lat)
+df1$beg_lat<- gsub("<e2>|<80>|<b2>|<b3>|N", "", df1$beg_lat)
+df1$beg_long<- gsub("<c2>", " ", df1$beg_long)
+df1$beg_long<- gsub("<b2>", ".", df1$beg_long)
+df1$beg_long<- gsub("<b0>|<e2>|<80>|<e2>|<b3>|<ef>|<bb>|<bf>|W", "", df1$beg_long)
+df1$beg_lat <- conv_unit(df1$beg_lat, from = 'deg_dec_min', to = 'dec_deg')
+df1$beg_long <- conv_unit(df1$beg_long, from = 'deg_dec_min', to = 'dec_deg')
+df1$end_lat <- as.character(df1$end_lat)
+df1$end_lat <- gsub("°|'|\"", " ", df1$end_lat)
+df1$end_lat<- iconv(df1$end_lat, "", "ASCII", "byte")
+df1$end_long<- iconv(df1$end_long, "", "ASCII", "byte")
+df1$end_lat<- gsub("<b2>", ".", df1$end_lat)
+df1$end_lat<- gsub("<e2>|<80>|<b2>|<b3>|N", "", df1$end_lat)
+df1$end_long<- gsub("<c2>", " ", df1$end_long)
+df1$end_long<- gsub("<b2>", ".", df1$end_long)
+df1$end_long<- gsub("<b0>|<e2>|<80>|<e2>|<b3>|<ef>|<bb>|<bf>|W", "", df1$end_long)
+#converts data from deg dec min sec format to dec degrees
+df1$end_lat <- conv_unit(df1$end_lat, from = 'deg_dec_min', to = 'dec_deg')
+df1$end_long <- conv_unit(df1$end_long, from = 'deg_dec_min', to = 'dec_deg')
+
+```
+```{r}
+df1 <- read.csv("~/data 900/uhaul.csv")
+
+View(df1)
+```
+
+
+
+```{r}
+#creates two tables for the beginning coordnates and end coordnates 
+df1$beg_long <- as.numeric(df1$beg_long)
+df1$beg_lat <- as.numeric(df1$beg_lat)
+df1$end_long <- as.numeric(df1$end_long)
+df1$end_lat <- as.numeric(df1$end_lat)
+df_beg <- select(df1,beg_long, beg_lat)
+df_end <- select(df1, end_long, end_lat)
+#df1$beg_long <- df1$beg_long*-1
+#df1$end_long <- df1$end_long*-1
+#finds the distance in meters between the two cities
+df1$dist_meters <- distHaversine(df_beg, df_end)
+#puts the distance into km
+df1$dist_km <- df1$dist_meters/1000
+
+View(df1)
+```
+
+```{r}
+#removes $ from the price column to put it into numeric format
+df1$price <- as.numeric(gsub('[$,]', '', df1$price))
+#divides distance/price for each row
+df1$price_per_km <- df1$price/df1$dist_km
+View(df1)
+```
+
+```{r}
+#mkes column of 1,1,2,2,3,3, etc
+df1[['group']] <- rep(1:45, each=2)
+View(df1)
+```
+
+
+```{r}
+#ordering the df by dist_km
+df2 <- df1[order(df1$`dist_km`),]
+#it creates a column path with alternating 1's and 2's
+for(i in 1:90){
+  if((i %% 2) == 0){
+  df2[i,"Path"] = 2
+  }
+  else{df2[i,"Path"] = 1}}
+View(df2)
+```
+
+
+
+```{r}
+list = c()
+#finds the price difference between each two city pair
+for(i in 1:90){
+  if((i %% 2) != 0){
+    df2[i,"diff"] = (df2$price_per_km[i] - df2$price_per_km[i+1])
+  }
+  else{df2[i,"diff"] = (df2$price_per_km[i] - df2$price_per_km[i-1])}}
+      
+view(df2)
+```
+
+```{r}
+#ordering the df by rank
+df3 <- df2[order(df2$`diff`, decreasing = TRUE),]
+for(i in 1:90){
+  df3[i,"rank"] = i
+}
+View(df3)
+```
+
+
+```{r}
+write_excel_csv(df3, "uhaul_final1.csv")
+```
+```{r}
+#pick two cities from list below
+#New York, Los Angeles,Chicago,Houston,Phoenix, Philadelphia, San Antonio, San Diego, Dallas, San Jose
+selected_cities <- c( "Chicago", "Dallas")
+df4 <- df3 %>%
+  subset(beg_city %in% selected_cities) %>%
+  subset(end_city %in% selected_cities)
+
+#shows map with stats of the trip using uhaul both ways
+icon_blue <- makeAwesomeIcon(markerColor = 'blue')
+leaflet(data = df4) %>% addTiles() %>%
+  addAwesomeMarkers(
+    lng=df4$beg_long, lat=df4$beg_lat,
+    icon = icon_blue, popup=paste("Beg City:", df4$beg_city,"<br>", "End City:", df4$end_city, "<br>","Price: $",df4$price,"<br>", "Price_Per_Km:",df4$price_per_km, "<br>", "Dist_KM:",df4$dist_km, "<br>", "Rank:",df4$rank)) %>%
+  addPolylines(data=df4, lng = ~beg_long, lat = ~beg_lat)
+
+```
+

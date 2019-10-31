@@ -1,0 +1,91 @@
+Index,price,beg_city,beg_state,beg_lat,beg_long,end_city,end_state,end_lat,end_long
+1,"$2,454.00 ",New York,New York,40.65817,-73.9365,Los Angeles,California,34.01833,-118.4065
+2,$930.00 ,New York,New York,40.65817,-73.9365,Chicago,Illinois,41.83583,-87.67567
+3,"$1,950.00 ",New York,New York,40.65817,-73.9365,Houston,Texas,29.78533,-95.38783
+4,"$2,211.00 ",New York,New York,40.65817,-73.9365,Phoenix,Arizona,33.57,-112.08733
+5,$218.00 ,New York,New York,40.65817,-73.9365,Philadelphia,Pennsylvania,40.00567,-75.13333
+6,"$2,095.00 ",New York,New York,40.65817,-73.9365,San Antonio,Texas,29.47017,-98.52167
+7,"$2,437.00 ",New York,New York,40.65817,-73.9365,San Diego,California,32.80917,-117.13433
+8,"$1,881.00 ",New York,New York,40.65817,-73.9365,Dallas,Texas,32.78933,-96.75983
+9,"$2,577.00 ",New York,New York,40.65817,-73.9365,San Jose,California,37.29133,-121.818
+10,"$2,331.00 ",Los Angeles,California,34.01833,-118.4065,New York,New York,40.65817,-73.9365
+11,"$1,867.00 ",Los Angeles,California,34.01833,-118.4065,Chicago,Illinois,41.83583,-87.67567
+12,"$1,695.00 ",Los Angeles,California,34.01833,-118.4065,Houston,Texas,29.78533,-95.38783
+13,$388.00 ,Los Angeles,California,34.01833,-118.4065,Phoenix,Arizona,33.57,-112.08733
+14,"$2,284.00 ",Los Angeles,California,34.01833,-118.4065,Philadelphia,Pennsylvania,40.00567,-75.13333
+15,"$1,545.00 ",Los Angeles,California,34.01833,-118.4065,San Antonio,Texas,29.47017,-98.52167
+16,$172.00 ,Los Angeles,California,34.01833,-118.4065,San Diego,California,32.80917,-117.13433
+17,"$1,620.00 ",Los Angeles,California,34.01833,-118.4065,Dallas,Texas,32.78933,-96.75983
+18,$221.00 ,Los Angeles,California,34.01833,-118.4065,San Jose,California,37.29133,-121.818
+19,$689.00 ,Chicago,Illinois,41.83583,-87.67567,New York,New York,40.65817,-73.9365
+20,"$1,473.00 ",Chicago,Illinois,41.83583,-87.67567,Los Angeles,California,34.01833,-118.4065
+21,"$1,496.00 ",Chicago,Illinois,41.83583,-87.67567,Houston,Texas,29.78533,-95.38783
+22,"$2,247.00 ",Chicago,Illinois,41.83583,-87.67567,Phoenix,Arizona,33.57,-112.08733
+23,$671.00 ,Chicago,Illinois,41.83583,-87.67567,Philadelphia,Pennsylvania,40.00567,-75.13333
+24,"$1,639.00 ",Chicago,Illinois,41.83583,-87.67567,San Antonio,Texas,29.47017,-98.52167
+25,"$1,503.00 ",Chicago,Illinois,41.83583,-87.67567,San Diego,California,32.80917,-117.13433
+26,"$1,423.00 ",Chicago,Illinois,41.83583,-87.67567,Dallas,Texas,32.78933,-96.75983
+27,"$1,544.00 ",Chicago,Illinois,41.83583,-87.67567,San Jose,California,37.29133,-121.818
+28,$663.00 ,Houston,Texas,29.78533,-95.38783,New York,New York,40.65817,-73.9365
+29,$777.00 ,Houston,Texas,29.78533,-95.38783,Los Angeles,California,34.01833,-118.4065
+30,$688.00 ,Houston,Texas,29.78533,-95.38783,Chicago,Illinois,41.83583,-87.67567
+31,"$1,035.00 ",Houston,Texas,29.78533,-95.38783,Phoenix,Arizona,33.57,-112.08733
+32,$789.00 ,Houston,Texas,29.78533,-95.38783,Philadelphia,Pennsylvania,40.00567,-75.13333
+33,$220.00 ,Houston,Texas,29.78533,-95.38783,San Antonio,Texas,29.47017,-98.52167
+34,$749.00 ,Houston,Texas,29.78533,-95.38783,San Diego,California,32.80917,-117.13433
+35,$176.00 ,Houston,Texas,29.78533,-95.38783,Dallas,Texas,32.78933,-96.75983
+36,$987.00 ,Houston,Texas,29.78533,-95.38783,San Jose,California,37.29133,-121.818
+37,"$1,307.00 ",Phoenix,Arizona,33.57,-112.08733,New York,New York,40.65817,-73.9365
+38,$94.00 ,Phoenix,Arizona,33.57,-112.08733,Los Angeles,California,34.01833,-118.4065
+39,$817.00 ,Phoenix,Arizona,33.57,-112.08733,Chicago,Illinois,41.83583,-87.67567
+40,$470.00 ,Phoenix,Arizona,33.57,-112.08733,Houston,Texas,29.78533,-95.38783
+41,"$1,282.00 ",Phoenix,Arizona,33.57,-112.08733,Philadelphia,Pennsylvania,40.00567,-75.13333
+42,$422.00 ,Phoenix,Arizona,33.57,-112.08733,San Antonio,Texas,29.47017,-98.52167
+43,$94.00 ,Phoenix,Arizona,33.57,-112.08733,San Diego,California,32.80917,-117.13433
+44,$561.00 ,Phoenix,Arizona,33.57,-112.08733,Dallas,Texas,32.78933,-96.75983
+45,$128.00 ,Phoenix,Arizona,33.57,-112.08733,San Jose,California,37.29133,-121.818
+46,$109.00 ,Philadelphia,Pennsylvania,40.00567,-75.13333,New York,New York,40.65817,-73.9365
+47,"$1,856.00 ",Philadelphia,Pennsylvania,40.00567,-75.13333,Los Angeles,California,34.01833,-118.4065
+48,$766.00 ,Philadelphia,Pennsylvania,40.00567,-75.13333,Chicago,Illinois,41.83583,-87.67567
+49,"$1,502.00 ",Philadelphia,Pennsylvania,40.00567,-75.13333,Houston,Texas,29.78533,-95.38783
+50,"$1,676.00 ",Philadelphia,Pennsylvania,40.00567,-75.13333,Phoenix,Arizona,33.57,-112.08733
+51,"$1,630.00 ",Philadelphia,Pennsylvania,40.00567,-75.13333,San Antonio,Texas,29.47017,-98.52167
+52,"$1,851.00 ",Philadelphia,Pennsylvania,40.00567,-75.13333,San Diego,California,32.80917,-117.13433
+53,"$1,452.00 ",Philadelphia,Pennsylvania,40.00567,-75.13333,Dallas,Texas,32.78933,-96.75983
+54,"$1,958.00 ",Philadelphia,Pennsylvania,40.00567,-75.13333,San Jose,California,37.29133,-121.818
+55,$754.00 ,San Antonio,Texas,29.47017,-98.52167,New York,New York,40.65817,-73.9365
+56,$962.00 ,San Antonio,Texas,29.47017,-98.52167,Los Angeles,California,34.01833,-118.4065
+57,$688.00 ,San Antonio,Texas,29.47017,-98.52167,Chicago,Illinois,41.83583,-87.67567
+58,$143.00 ,San Antonio,Texas,29.47017,-98.52167,Houston,Texas,29.78533,-95.38783
+59,$788.00 ,San Antonio,Texas,29.47017,-98.52167,Phoenix,Arizona,33.57,-112.08733
+60,$856.00 ,San Antonio,Texas,29.47017,-98.52167,Philadelphia,Pennsylvania,40.00567,-75.13333
+61,$927.00 ,San Antonio,Texas,29.47017,-98.52167,San Diego,California,32.80917,-117.13433
+62,$280.00 ,San Antonio,Texas,29.47017,-98.52167,Dallas,Texas,32.78933,-96.75983
+63,"$1,120.00 ",San Antonio,Texas,29.47017,-98.52167,San Jose,California,37.29133,-121.818
+64,"$2,315.00 ",San Diego,California,32.80917,-117.13433,New York,New York,40.65817,-73.9365
+65,$90.00 ,San Diego,California,32.80917,-117.13433,Los Angeles,California,34.01833,-118.4065
+66,"$1,840.00 ",San Diego,California,32.80917,-117.13433,Chicago,Illinois,41.83583,-87.67567
+67,"$1,302.00 ",San Diego,California,32.80917,-117.13433,Houston,Texas,29.78533,-95.38783
+68,$315.00 ,San Diego,California,32.80917,-117.13433,Phoenix,Arizona,33.57,-112.08733
+69,"$2,275.00 ",San Diego,California,32.80917,-117.13433,Philadelphia,Pennsylvania,40.00567,-75.13333
+70,"$1,490.00 ",San Diego,California,32.80917,-117.13433,San Antonio,Texas,29.47017,-98.52167
+71,"$1,205.00 ",San Diego,California,32.80917,-117.13433,Dallas,Texas,32.78933,-96.75983
+72,$222.00 ,San Diego,California,32.80917,-117.13433,San Jose,California,37.29133,-121.818
+73,$753.00 ,Dallas,Texas,32.78933,-96.75983,New York,New York,40.65817,-73.9365
+74,$864.00 ,Dallas,Texas,32.78933,-96.75983,Los Angeles,California,34.01833,-118.4065
+75,$398.00 ,Dallas,Texas,32.78933,-96.75983,Chicago,Illinois,41.83583,-87.67567
+76,$185.00 ,Dallas,Texas,32.78933,-96.75983,Houston,Texas,29.78533,-95.38783
+77,$768.00 ,Dallas,Texas,32.78933,-96.75983,Phoenix,Arizona,33.57,-112.08733
+78,$726.00 ,Dallas,Texas,32.78933,-96.75983,Philadelphia,Pennsylvania,40.00567,-75.13333
+79,$280.00 ,Dallas,Texas,32.78933,-96.75983,San Antonio,Texas,29.47017,-98.52167
+80,$827.00 ,Dallas,Texas,32.78933,-96.75983,San Diego,California,32.80917,-117.13433
+81,$959.00 ,Dallas,Texas,32.78933,-96.75983,San Jose,California,37.29133,-121.818
+82,"$2,577.00 ",San Jose,California,37.29133,-121.818,New York,New York,40.65817,-73.9365
+83,$414.00 ,San Jose,California,37.29133,-121.818,Los Angeles,California,34.01833,-118.4065
+84,"$2,059.00 ",San Jose,California,37.29133,-121.818,Chicago,Illinois,41.83583,-87.67567
+85,"$2,145.00 ",San Jose,California,37.29133,-121.818,Houston,Texas,29.78533,-95.38783
+86,"$1,142.00 ",San Jose,California,37.29133,-121.818,Phoenix,Arizona,33.57,-112.08733
+87,"$2,535.00 ",San Jose,California,37.29133,-121.818,Philadelphia,Pennsylvania,40.00567,-75.13333
+88,"$2,002.00 ",San Jose,California,37.29133,-121.818,San Antonio,Texas,29.47017,-98.52167
+89,$512.00 ,San Jose,California,37.29133,-121.818,San Diego,California,32.80917,-117.13433
+90,"$1,997.00 ",San Jose,California,37.29133,-121.818,Dallas,Texas,32.78933,-96.75983
